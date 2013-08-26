@@ -97,6 +97,12 @@
       <version>1.1.0</version>
     </dependency>    
     <!-- /for the DAO Registry -->
+
+	<dependency>
+		<groupId>com.pi4j</groupId>
+		<artifactId>pi4j-core</artifactId>
+		<version>0.0.5</version>
+	</dependency>
     
   </dependencies>
   
