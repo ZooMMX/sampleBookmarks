@@ -62,6 +62,22 @@ public class MultiPageWebHandlers {
 	  led1.blink(500, 5000);
 	  return "{\"count\":" + count + "}";
 	}
+	
+	@WebGet("/high00")
+	public String high00(){
+	  initGPIO();
+	  count += 2;
+	  led1.high();
+	  return "{\"count\":" + count + "}";
+	}
+	
+	@WebGet("/low00")
+	public String low00(){
+	  initGPIO();
+	  count += 3;
+	  led1.low();
+	  return "{\"count\":" + count + "}";
+	}
 
 	@WebModelHandler(startsWith="/operaciones")
     public void operacionesPage(@WebModel Map m, @WebUser User user){
