@@ -28,10 +28,10 @@
 <section class="content">
   <h4>Operaciones Raspberry PI</h4>
   <p class="text-center">
-  	<a id="prender" class="btn btn-success btn-large btn-block">Prender led</a>
+  	<a id="high00" class="btn btn-success btn-large btn-block">Prender led</a>
   </p>
 	<p class="text-center">
-  	<a id="high00" class="btn btn-large btn-block">Blink</a>
+  	<a id="prender" class="btn btn-large btn-block">Blink</a>
   </p>
   <p class="text-center">
   	<a id="low00" class="btn btn-danger btn-large btn-block">Apagar led</a>
