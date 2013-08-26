@@ -2,12 +2,9 @@
   <div class="navbar-inner">
     <a class="brand" href="${_r.contextPath}">Porto-tron</a>
     <ul class="nav">
-      <li class="[#if piIs("/bookmarks")]active[/#if]"><a href="bookmarks">Demo Bookmarks</a></li>
+      <li class="[#if piIs("/operaciones")]active[/#if]"><a href="operaciones">Operaciones Raspberry</a></li>
       <li class="[#if piIs("/info")]active[/#if]"><a href="info">Información Raspberry</a></li>
-      [#--
-      <li class="[#if piIs("/topics")]active[/#if]"><a href="add">Topics</a></li>
-      <li class="[#if piIs("/profile")]active[/#if]"><a href="editprofile">Profile</a></li>
-      --]
+
     </ul>
     <div id="userInfo">
       <label>[#if _r.user??]${_r.user.fullName!"no full name"}[/#if] <a class="logoff">(logoff)</a></label>

@@ -4,9 +4,10 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import com.britesnow.snow.web.handler.annotation.WebModelHandler;
-import com.britesnow.snow.web.param.annotation.WebModel;
-import com.britesnow.snow.web.param.annotation.WebUser;
+import com.britesnow.snow.web.handler.annotation.*;
+import com.britesnow.snow.web.param.annotation.*;
+import com.britesnow.snow.web.rest.annotation.*;
+
 import com.example.samplebookmarks.dao.ItemDao;
 import com.example.samplebookmarks.entity.User;
 import com.google.inject.Singleton;
@@ -17,16 +18,29 @@ import java.text.ParseException;
 import com.pi4j.system.NetworkInfo;
 import com.pi4j.system.SystemInfo;
 
+import com.pi4j.io.gpio.*;
 
 @Singleton
 public class MultiPageWebHandlers {
 
     @Inject
     private ItemDao itemDao;
+
+	GpioController gpio;
+  	GpioPinDigitalOutput led1;
+
+	Integer count = 0;
     
+	public void initGPIO() { 
+		if(gpio == null) {
+			gpio = GpioFactory.getInstance();
+			led1 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00);
+		}
+	}
+
     @WebModelHandler(startsWith="/")
     public void allPages(@WebModel Map m){
-        m.put("version", "0.1.0");
+        m.put("version", "0.1.0 "+count++);
     }
     
     /**
@@ -40,6 +54,19 @@ public class MultiPageWebHandlers {
             m.put("items", itemDao.getItemsForUser(user.getId()));
         }
     }
+
+	@WebGet("/items-count")
+	public String getItemsCount(){
+	  initGPIO();
+	  count += 10;
+	  led1.blink(500, 5000);
+	  return "{\"count\":" + count + "}";
+	}
+
+	@WebModelHandler(startsWith="/operaciones")
+    public void operacionesPage(@WebModel Map m, @WebUser User user){
+		
+	}
 
 	@WebModelHandler(startsWith="/info")
     public void infoPage(@WebModel Map m, @WebUser User user){
