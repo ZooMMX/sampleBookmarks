@@ -34,7 +34,7 @@ public class MultiPageWebHandlers {
 	public void initGPIO() { 
 		if(gpio == null) {
 			gpio = GpioFactory.getInstance();
-			led1 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_06);
+			led1 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00);
 		}
 	}
 
