@@ -19,6 +19,7 @@ import com.pi4j.system.NetworkInfo;
 import com.pi4j.system.SystemInfo;
 
 import com.pi4j.io.gpio.*;
+import com.pi4j.io.gpio.trigger.*;
 
 @Singleton
 public class MultiPageWebHandlers {
@@ -28,6 +29,7 @@ public class MultiPageWebHandlers {
 
 	GpioController gpio;
   	GpioPinDigitalOutput led1;
+	GpioPinDigitalInput sensor1;
 
 	Integer count = 0;
     
@@ -35,6 +37,8 @@ public class MultiPageWebHandlers {
 		if(gpio == null) {
 			gpio = GpioFactory.getInstance();
 			led1 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00);
+ 			sensor1 = gpio.provisionDigitalInputPin(RaspiPin.GPIO_08, PinPullResistance.PULL_DOWN);
+			sensor1.addTrigger(new GpioSetStateTrigger(PinState.HIGH, led1, PinState.LOW));
 		}
 	}
 
