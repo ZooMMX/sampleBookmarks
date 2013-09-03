@@ -51,9 +51,12 @@ public class MultiPageWebHandlers {
 							if(event.getPin() == RaspiPin.GPIO_07) {
 								if(event.getState()==PinState.HIGH) {
 									cerrando = true;
+									System.out.println("Estado HIGH");
 								}
 								if(cerrando && event.getState()==PinState.LOW) {
 									led1.low();
+									cerrando = false;
+									System.out.println("Estado LOW. Simula flanco de bajada");
 								}
 							}
 			            }

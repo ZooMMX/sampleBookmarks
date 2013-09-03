@@ -24,6 +24,6 @@
     [#else]
       [@includeTemplate name="loginform.ftl"/] 
     [/#if]
-    <footer>${version}</footer>
+    <footer>--${version}--</footer>
   </body>
 </html>
