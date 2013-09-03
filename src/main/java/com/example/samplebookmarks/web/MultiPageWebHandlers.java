@@ -82,6 +82,14 @@ public class MultiPageWebHandlers {
 	  led1.low();
 	  return "{\"count\":" + count + "}";
 	}
+	
+	@WebGet("/sensorState")
+	public String sensorState(){
+	  initGPIO();
+	  count += 7;
+
+	  return "{\"state\":" + sensor1.getState() + "}";
+	}
 
 	@WebModelHandler(startsWith="/operaciones")
     public void operacionesPage(@WebModel Map m, @WebUser User user){
