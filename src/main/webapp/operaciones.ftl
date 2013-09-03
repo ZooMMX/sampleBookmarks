@@ -30,7 +30,10 @@
 	      url: '/sensorState',
 	      cache:false,
 	      success: function() { alert('Datos: '); },
-		  error: function() { alert('falla en llamada ajax'); }
+		  error: function(jqXHR, textStatus, errorThrown) {
+			alert('falla en llamada ajax');
+		  	console.log(textStatus, errorThrown);
+		  }
 	    });
 	  });
 	});

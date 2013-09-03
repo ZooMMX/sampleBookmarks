@@ -29,6 +29,7 @@ public class MultiPageWebHandlers {
 
 	GpioController gpio;
   	GpioPinDigitalOutput led1;
+  	GpioPinDigitalOutput led2;
 	GpioPinDigitalInput sensor1;
 
 	Integer count = 0;
@@ -37,8 +38,9 @@ public class MultiPageWebHandlers {
 		if(gpio == null) {
 			gpio = GpioFactory.getInstance();
 			led1 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00);
+			led2 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_08);
  			sensor1 = gpio.provisionDigitalInputPin(RaspiPin.GPIO_07, PinPullResistance.PULL_DOWN);
-			//sensor1.addTrigger(new GpioSetStateTrigger(PinState.HIGH, led1, PinState.LOW));
+			sensor1.addTrigger(new GpioSetStateTrigger(PinState.HIGH, led1, PinState.LOW));
 		}
 	}
 
@@ -64,6 +66,7 @@ public class MultiPageWebHandlers {
 	  initGPIO();
 	  count += 10;
 	  led1.blink(500, 5000);
+	  led2.blink(500, 50000);	
 	  return "{\"count\":" + count + "}";
 	}
 	
