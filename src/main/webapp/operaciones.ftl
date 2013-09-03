@@ -29,9 +29,7 @@
 	    $.ajax({
 	      url: '/sensorState',
 	      cache:false,
-	      success: function(results) { 
-		            alert(results);
-		  }
+	      success: function(data) { alert("Datos: " + data.message); }
 	    });
 	  });
 	});
