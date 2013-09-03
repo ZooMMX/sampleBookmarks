@@ -20,6 +20,7 @@ import com.pi4j.system.SystemInfo;
 
 import com.pi4j.io.gpio.*;
 import com.pi4j.io.gpio.trigger.*;
+import com.pi4j.io.gpio.event.*;
 
 @Singleton
 public class MultiPageWebHandlers {
@@ -33,6 +34,7 @@ public class MultiPageWebHandlers {
 	GpioPinDigitalInput sensor1;
 
 	Integer count = 0;
+	Boolean cerrando = false;
     
 	public void initGPIO() { 
 		if(gpio == null) {
@@ -40,7 +42,23 @@ public class MultiPageWebHandlers {
 			led1 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00);
 			led2 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_08);
  			sensor1 = gpio.provisionDigitalInputPin(RaspiPin.GPIO_07, PinPullResistance.PULL_DOWN);
-			sensor1.addTrigger(new GpioSetStateTrigger(PinState.HIGH, led1, PinState.LOW));
+			led2.low();
+			sensor1.addListener(new GpioPinListenerDigital() {
+			            @Override
+			            public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
+			                // display pin state on console
+			                System.out.println(" --> GPIO PIN STATE CHANGE: " + event.getPin() + " = " + event.getState());
+							if(event.getPin() == RaspiPin.GPIO_08) {
+								if(event.getState()==PinState.HIGH) {
+									cerrando = true;
+								}
+								if(cerrando && event.getState()==PinState.LOW) {
+									led1.low();
+								}
+							}
+			            }
+
+			        });
 		}
 	}
 
@@ -65,8 +83,7 @@ public class MultiPageWebHandlers {
 	public String getItemsCount(){
 	  initGPIO();
 	  count += 10;
-	  led1.blink(500, 5000);
-	  led2.blink(500, 50000);	
+	  led1.blink(500, 5000);	
 	  return "{\"count\":" + count + "}";
 	}
 	
