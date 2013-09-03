@@ -24,6 +24,17 @@
 	    });
 	  });
 	});
+	$(function() {
+	  $('#sensorState').click(function() {
+	    $.ajax({
+	      url: '/sensorState',
+	      cache:false,
+	      success: function(results) { 
+		            alert(results);
+		  }
+	    });
+	  });
+	});
 </script>
 <section class="content">
   <h4>Operaciones Raspberry PI</h4>
@@ -35,6 +46,9 @@
   </p>
   <p class="text-center">
   	<a id="low00" class="btn btn-danger btn-large btn-block">Apagar led</a>
+  </p>
+  <p class="text-center">
+  	<a id="sensorState" class="btn btn-large btn-block">¿Estado del sensor?</a>
   </p>
 </section>
 
