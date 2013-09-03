@@ -37,7 +37,7 @@ public class MultiPageWebHandlers {
 		if(gpio == null) {
 			gpio = GpioFactory.getInstance();
 			led1 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00);
- 			sensor1 = gpio.provisionDigitalInputPin(RaspiPin.GPIO_08, PinPullResistance.PULL_UP);
+ 			sensor1 = gpio.provisionDigitalInputPin(RaspiPin.GPIO_07, PinPullResistance.PULL_DOWN);
 			//sensor1.addTrigger(new GpioSetStateTrigger(PinState.HIGH, led1, PinState.LOW));
 		}
 	}

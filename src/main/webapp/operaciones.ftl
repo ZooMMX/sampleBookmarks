@@ -29,7 +29,8 @@
 	    $.ajax({
 	      url: '/sensorState',
 	      cache:false,
-	      success: function(data) { alert("Datos: " + data.message); }
+	      success: function() { alert('Datos: '); },
+		  error: function() { alert('falla en llamada ajax'); }
 	    });
 	  });
 	});
