@@ -91,7 +91,7 @@ public class MultiPageWebHandlers {
 	  initGPIO();
 	  count += 7;
 
-	  return "{\"state\":" + sensor1.getState() + "}";
+	  return "{\"state\":\"" + sensor1.getState() + "\"}";
 	}
 
 	@WebModelHandler(startsWith="/operaciones")

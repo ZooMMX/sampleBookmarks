@@ -29,7 +29,7 @@
 	    $.ajax({
 	      url: '/sensorState',
 	      cache:false,
-	      success: function() { alert('Datos: '); },
+	      success: function(data) { alert('Datos: '+data.state); },
 		  error: function(jqXHR, textStatus, errorThrown) {
 			alert('falla en llamada ajax');
 		  	console.log(textStatus, errorThrown);
