@@ -48,7 +48,7 @@ public class MultiPageWebHandlers {
 			            public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
 			                // display pin state on console
 			                System.out.println(" --> GPIO PIN STATE CHANGE: " + event.getPin() + " = " + event.getState());
-							if(event.getPin() == RaspiPin.GPIO_08) {
+							if(event.getPin() == RaspiPin.GPIO_07) {
 								if(event.getState()==PinState.HIGH) {
 									cerrando = true;
 								}
