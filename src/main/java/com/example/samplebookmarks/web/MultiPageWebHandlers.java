@@ -30,7 +30,7 @@ public class MultiPageWebHandlers {
 
 	GpioController gpio;
   	GpioPinDigitalOutput led1;
-  	GpioPinDigitalOutput led2;
+  	//GpioPinDigitalOutput led2;
 	GpioPinDigitalInput sensor1;
 
 	Integer count = 0;
@@ -40,23 +40,24 @@ public class MultiPageWebHandlers {
 		if(gpio == null) {
 			gpio = GpioFactory.getInstance();
 			led1 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00);
-			led2 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_08);
+			//led2 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_08);
  			sensor1 = gpio.provisionDigitalInputPin(RaspiPin.GPIO_07, PinPullResistance.PULL_DOWN);
-			led2.low();
+			//led2.low();
 			sensor1.addListener(new GpioPinListenerDigital() {
 			            @Override
 			            public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
 			                // display pin state on console
 			                System.out.println(" --> GPIO PIN STATE CHANGE: " + event.getPin() + " = " + event.getState());
 							if(event.getPin() == RaspiPin.GPIO_07) {
+								System.out.println("<-- GPIO07, High? "+(event.getState()==PinState.HIGH) + ", val= "+event.getState().toString());
 								if(event.getState()==PinState.HIGH) {
 									cerrando = true;
-									System.out.println("Estado HIGH");
+									System.out.println("--- Estado HIGH");
 								}
 								if(cerrando && event.getState()==PinState.LOW) {
 									led1.low();
 									cerrando = false;
-									System.out.println("Estado LOW. Simula flanco de bajada");
+									System.out.println("--- Estado LOW. Simula flanco de bajada");
 								}
 							}
 			            }
